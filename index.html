@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Verde Vivo — Natureza, Conservação e Bem‑Estar</title>
+  <meta name="description" content="Verde Vivo: curiosidades sobre biodiversidade, dicas de trilhas, conservação ambiental e fotos incríveis da natureza brasileira e do mundo." />
+  <meta name="color-scheme" content="light dark" />
+  <style>
+    :root{
+      --bg:#f5f8f4; --fg:#1f2a1f; --muted:#5a6b5a; --brand:#2f9e44; --brand2:#1971c2; --card:#ffffff; --ring:rgba(47,158,68,.25)
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{font-family:system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; background:var(--bg); color:var(--fg); line-height:1.6}
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%; display:block}
+    .container{max-width:1200px; margin:auto; padding:0 20px}
+
+    /* Header / Hero */
+    header.hero{position:relative; isolation:isolate; background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.55)), url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat; color:#fff}
+    header .wrap{padding:80px 20px 110px}
+    header h1{margin:0; font-size:clamp(2rem, 4vw, 3rem); letter-spacing:.2px}
+    header p{max-width:720px; font-size:clamp(1rem, 1.6vw, 1.125rem); opacity:.95}
+    .cta{margin-top:20px; display:flex; gap:12px; flex-wrap:wrap}
+    .btn{background:var(--brand); color:#fff; border:none; padding:12px 18px; border-radius:12px; font-weight:700; cursor:pointer; box-shadow:0 6px 20px rgba(47,158,68,.25); transition:transform .15s ease, box-shadow .2s ease}
+    .btn:hover{transform:translateY(-2px); box-shadow:0 10px 26px rgba(47,158,68,.33)}
+    .btn.sec{background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.35); backdrop-filter: blur(6px)}
+
+    /* Floating stats */
+    .floating{--size:1000px; position:absolute; inset:auto 0 -60px 0; display:grid; place-items:center}
+    .stats{background:var(--card); border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,.08); padding:18px 22px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; width:min(980px, 92%)}
+    .stat{display:flex; align-items:center; gap:12px}
+    .stat b{font-size:1.25rem}
+    .badge{width:44px; height:44px; display:grid; place-items:center; border-radius:12px; background:#e9f7ef; color:var(--brand); font-size:22px}
+
+    /* Sections */
+    section{padding:90px 0}
+    h2.section-title{font-size:clamp(1.6rem, 2.2vw, 2rem); text-align:center; margin:0 0 14px}
+    p.section-sub{color:var(--muted); text-align:center; margin:0 0 40px}
+
+    /* Cards grid */
+    .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px}
+    .card{background:var(--card); border:1px solid #e9efe9; border-radius:14px; overflow:hidden; transition:transform .15s ease, box-shadow .2s ease}
+    .card:hover{transform:translateY(-4px); box-shadow:0 12px 26px rgba(0,0,0,.08)}
+    .card .body{padding:16px 16px 18px}
+    .chip{display:inline-block; font-size:.8rem; padding:6px 10px; border-radius:999px; background:#e6f4ea; color:#1b7a35; font-weight:600}
+
+    /* Newsletter */
+    .newsletter{background:linear-gradient(135deg,#eaf7ee,#eef5fb); border:1px solid #d7e7dc; border-radius:16px; padding:28px; display:grid; grid-template-columns:1.3fr .9fr; gap:20px}
+    .newsletter form{display:flex; gap:10px; flex-wrap:wrap}
+    .field{flex:1 1 260px; padding:12px 14px; border:1px solid #cfe3d3; border-radius:12px; outline:none}
+    .field:focus{box-shadow:0 0 0 6px var(--ring); border-color:#9dd6a8}
+
+    /* Gallery */
+    .mosaic{display:grid; grid-template-columns:repeat(12,1fr); gap:10px}
+    .mosaic img{border-radius:12px; height:100%; object-fit:cover}
+    .m1{grid-column:span 7}
+    .m2{grid-column:span 5}
+    .m3{grid-column:span 4}
+    .m4{grid-column:span 4}
+    .m5{grid-column:span 4}
+
+    /* Footer */
+    footer{background:#0f2d1a; color:#d0e5d6}
+    footer .wrap{padding:50px 20px}
+    footer a{color:#d0e5d6}
+    .foot-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px}
+    .copyright{border-top:1px solid rgba(255,255,255,.12); margin-top:26px; padding-top:16px; font-size:.95rem; color:#c6ddcd}
+
+    /* Back to top */
+    #top{position:fixed; right:16px; bottom:16px; padding:10px 12px; border-radius:12px; background:var(--brand2); color:#fff; border:none; cursor:pointer; box-shadow:0 10px 22px rgba(25,113,194,.28); display:none}
+
+    @media (max-width:860px){
+      .newsletter{grid-template-columns:1fr}
+      .floating{inset:auto 0 -40px 0}
+      header .wrap{padding-bottom:140px}
+    }
+      /* Marca e ícones */
+    .brand{display:inline-flex;align-items:center;gap:10px;font-weight:800;color:#fff}
+    .brand svg{width:34px;height:34px;display:block}
+    .social{display:flex;gap:12px}
+    .social a{width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.3);border-radius:12px;transition:transform .15s ease, background .2s ease, border-color .2s ease}
+    .social a:hover{transform:translateY(-2px);background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.5)}
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero" role="banner" aria-label="Verde Vivo">
+    <div class="wrap container">
+      <h1 class="brand" aria-label="Verde Vivo">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" role="img">
+          <path d="M20.9 3.1c.3.3.3.8 0 1.1-2.6 2.6-6.8 2.2-9.7 5.1-2.9 2.9-2.5 7.1-5.1 9.7-.3.3-.8.3-1.1 0s-.3-.8 0-1.1c2.6-2.6 2.2-6.8 5.1-9.7 2.9-2.9 7.1-2.5 9.7-5.1.3-.3.8-.3 1.1 0z"></path>
+          <path d="M12 6c0 6 6 6 6 6s0 6-6 6-6-6-6-6 6 0 6-6z" opacity=".35"></path>
+        </svg>
+        <span>Verde Vivo</span>
+      </h1>
+      <p>Histórias, dicas e ações para reconectar você com a natureza. Descubra trilhas, conheça espécies incríveis e aprenda como cuidar do planeta — começando pelo seu quintal.</p>
+      <div class="cta" role="group" aria-label="Ações primárias">
+        <a href="#artigos"><button class="btn">Explorar artigos</button></a>
+        <a href="#newsletter"><button class="btn sec">Assinar novidades</button></a>
+      </div>
+    </div>
+    <div class="floating">
+      <div class="stats" aria-label="Indicadores do projeto">
+        <div class="stat"><div class="badge">🌎</div><div><b>120+</b><br><small>Parques visitados</small></div></div>
+        <div class="stat"><div class="badge">🪴</div><div><b>8.500</b><br><small>Mudas plantadas</small></div></div>
+        <div class="stat"><div class="badge">📸</div><div><b>30k</b><br><small>Fotos catalogadas</small></div></div>
+      </div>
+    </div>
+  </header>
+
+  <main id="conteudo" class="container" role="main">
+    <!-- ARTIGOS EM DESTAQUE -->
+    <section id="artigos" aria-labelledby="t-artigos">
+      <h2 id="t-artigos" class="section-title">Artigos em Destaque</h2>
+      <p class="section-sub">Biodiversidade, conservação, trilhas e bem‑estar ao ar livre.</p>
+      <div class="grid">
+        <article class="card" aria-label="Guia de trilhas na Amazônia">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop" alt="Trilha entre árvores altas de floresta tropical" loading="lazy" />
+          <div class="body">
+            <span class="chip">Trilhas</span>
+            <h3>Guia essencial de trilhas na Amazônia</h3>
+            <p>Como planejar uma caminhada segura, o que levar e os melhores períodos para visitar sem impactar a fauna.</p>
+            <a href="#">Ler artigo →</a>
+          </div>
+        </article>
+        <article class="card" aria-label="Polinizadores urbanos">
+          <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=1200&auto=format&fit=crop" alt="Abelha pousada em flor roxa" loading="lazy" />
+          <div class="body">
+            <span class="chip">Biodiversidade</span>
+            <h3>Polinizadores na cidade: como ajudar</h3>
+            <p>Plantas nativas para varandas e quintais, água rasa e abrigos que transformam microespaços em refúgios.</p>
+            <a href="#">Ler artigo →</a>
+          </div>
+        </article>
+        <article class="card" aria-label="Compostagem doméstica">
+          <img src="https://images.unsplash.com/photo-1553532435-93d532a45f19?q=80&w=1200&auto=format&fit=crop" alt="Mãos segurando solo escuro com minhocas" loading="lazy" />
+          <div class="body">
+            <span class="chip">Clima & Resíduos</span>
+            <h3>Compostagem simples em apartamentos</h3>
+            <p>Do zero ao húmus: três métodos sem cheiro para reduzir lixo orgânico e enriquecer suas plantas.</p>
+            <a href="#">Ler artigo →</a>
+          </div>
+        </article>
+        <article class="card" aria-label="Banho de floresta">
+          <img src="https://images.unsplash.com/photo-1477414348463-c0eb7f1359b6?q=80&w=1200&auto=format&fit=crop" alt="Luz do sol atravessando copa de árvores em floresta" loading="lazy" />
+          <div class="body">
+            <span class="chip">Bem‑estar</span>
+            <h3>Banho de floresta: ciência e prática</h3>
+            <p>Benefícios do <em>shinrin‑yoku</em> para ansiedade, foco e sono — com um roteiro de 20 minutos.</p>
+            <a href="#">Ler artigo →</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section id="newsletter" aria-labelledby="t-news">
+      <h2 id="t-news" class="section-title">Receba novidades verdes</h2>
+      <p class="section-sub">Uma curadoria mensal com trilhas, ações e ideias práticas para cuidar do planeta.</p>
+      <div class="newsletter" role="region" aria-label="Formulário de assinatura">
+        <div>
+          <h3>Assine a newsletter 🌱</h3>
+          <p>Sem spam. Só conteúdo útil e inspirador.</p>
+          <ul>
+            <li>Guias de parques e áreas de conservação</li>
+            <li>Calendário de floradas e observação de aves</li>
+            <li>Desafios mensais de baixo impacto</li>
+          </ul>
+        </div>
+        <form onsubmit="return validateEmail(event)">
+          <label class="sr-only" for="email">Seu e‑mail</label>
+          <input class="field" id="email" name="email" type="email" placeholder="Seu melhor e‑mail" autocomplete="email" required />
+          <button class="btn" type="submit">Quero receber</button>
+          <small id="msg" aria-live="polite"></small>
+        </form>
+      </div>
+    </section>
+
+    <!-- GALERIA MOSAICO -->
+    <section aria-labelledby="t-gal">
+      <h2 id="t-gal" class="section-title">Olhar Selvagem</h2>
+      <p class="section-sub">Um mosaico de paisagens e espécies para inspirar seu próximo encontro com o verde.</p>
+      <div class="mosaic" role="list">
+        <img class="m1" role="listitem" src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1600&auto=format&fit=crop" alt="Cachoeira em vale verde" loading="lazy" />
+        <img class="m2" role="listitem" src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop" alt="Montanha ao pôr do sol com névoa" loading="lazy" />
+        <img class="m3" role="listitem" src="https://images.unsplash.com/photo-1431794062232-2a99a5431c6c?q=80&w=1200&auto=format&fit=crop" alt="Folhas verdes com gotas de orvalho" loading="lazy" />
+        <img class="m4" role="listitem" src="https://images.unsplash.com/photo-1500534623283-312aade485b7?q=80&w=1200&auto=format&fit=crop" alt="Rio sinuoso entre árvores" loading="lazy" />
+        <img class="m5" role="listitem" src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1200&auto=format&fit=crop" alt="Mata fechada com feixes de luz" loading="lazy" />
+      </div>
+    </section>
+
+    <!-- CHAMADA PARA AÇÃO -->
+    <section aria-labelledby="t-acao">
+      <h2 id="t-acao" class="section-title">Participe de uma ação local</h2>
+      <p class="section-sub">Mutirões mensais de plantio, limpeza de trilhas e ciência cidadã.</p>
+      <div class="grid">
+        <div class="card"><div class="body">
+          <span class="chip">Plantio</span>
+          <h3>Restinga Viva — 19 de outubro</h3>
+          <p>Recomposição de áreas degradadas com espécies nativas costeiras. Fornecemos luvas e ferramentas.</p>
+          <a href="#">Quero me inscrever →</a>
+        </div></div>
+        <div class="card"><div class="body">
+          <span class="chip">Monitoramento</span>
+          <h3>Observação de aves — 9 de novembro</h3>
+          <p>Ponto de encontro às 6h. Trilha leve. Leve binóculos, água e protetor solar.</p>
+          <a href="#">Quero participar →</a>
+        </div></div>
+        <div class="card"><div class="body">
+          <span class="chip">Limpeza</span>
+          <h3>Cuidando do Rio — 23 de novembro</h3>
+          <p>Mutirão de coleta seletiva e educação ambiental nas margens do rio urbano.</p>
+          <a href="#">Quero ajudar →</a>
+        </div></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- RODAPÉ -->
+  <footer role="contentinfo">
+    <div class="wrap container">
+      <div class="foot-grid">
+        <div>
+          <h3>Sobre o Verde Vivo</h3>
+          <p>Um projeto independente dedicado a aproximar pessoas da natureza com informação de qualidade e experiências ao ar livre seguras e inclusivas.</p>
+        </div>
+        <div>
+          <h3>Links rápidos</h3>
+          <ul>
+            <li><a href="#artigos">Artigos</a></li>
+            <li><a href="#newsletter">Newsletter</a></li>
+            <li><a href="#">Política de Privacidade</a></li>
+            <li><a href="#">Termos de Uso</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Redes</h3>
+          <div class="social" aria-label="Redes sociais">
+          <a href="#" aria-label="Instagram" title="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="4"></rect>
+              <circle cx="12" cy="12" r="4"></circle>
+              <circle cx="17.2" cy="6.8" r="1"></circle>
+            </svg>
+          </a>
+          <a href="#" aria-label="YouTube" title="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="24" height="24">
+              <path d="M22 12s0-3.4-.4-4.9c-.2-.8-.8-1.4-1.6-1.6C18.4 5 12 5 12 5s-6.4 0-8 .5c-.8.2-1.4.8-1.6 1.6C2 8.6 2 12 2 12s0 3.4.4 4.9c.2.8.8 1.4 1.6 1.6 1.6.5 8 .5 8 .5s6.4 0 8-.5c.8-.2 1.4-.8 1.6-1.6.4-1.5.4-4.9.4-4.9z"></path>
+              <path d="M10 9v6l5-3-5-3z" fill="#fff"></path>
+            </svg>
+          </a>
+          <a href="#" aria-label="TikTok" title="TikTok">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="24" height="24">
+              <path d="M15 3v3.2c1.5 1.1 3.1 1.8 5 1.8v3c-1.9 0-3.5-.5-5-1.4V16a5 5 0 11-5-5c.7 0 1.4.1 2 .4V9.1c-.6-.1-1.3-.1-2-.1A8 8 0 1015 17V3z"></path>
+            </svg>
+          </a>
+        </div>
+          <p><small>Contato: oi@verdevivo.site</small></p>
+        </div>
+      </div>
+      <div class="copyright">© <span id="year"></span> Verde Vivo • Feito com 🌿 para quem ama o planeta</div>
+    </div>
+  </footer>
+
+  <button id="top" aria-label="Voltar ao topo" title="Voltar ao topo">↑</button>
+
+  <script>
+    // Acessibilidade: rótulo visual escondido
+    const sr = document.createElement('style');
+    sr.innerHTML = `.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}`;
+    document.head.appendChild(sr);
+
+    // Ano no rodapé
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Back to top
+    const topBtn = document.getElementById('top');
+    window.addEventListener('scroll', () => {
+      topBtn.style.display = window.scrollY > 600 ? 'block' : 'none';
+    });
+    topBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+    // Validação simples do e-mail
+    function validateEmail(e){
+      e.preventDefault();
+      const input = document.getElementById('email');
+      const msg = document.getElementById('msg');
+      const ok = /.+@.+\..+/.test(input.value);
+      if(!ok){
+        msg.textContent = 'Digite um e‑mail válido.';
+        msg.style.color = '#b00020';
+        input.focus();
+        return false;
+      }
+      msg.textContent = 'Obrigado! Em breve você receberá nossas novidades.';
+      msg.style.color = '#1b7a35';
+      input.value='';
+      return false;
+    }
+    window.validateEmail = validateEmail;
+  </script>
+</body>
+</html>
